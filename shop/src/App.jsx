@@ -1,36 +1,35 @@
-import React from "react";
-import Navbar from "./Components/Navbar/Index";
-import Footer from "./Components/Footer/Index";
-import { Navigate, Route, Routes } from "react-router-dom";
-import Home from "./Pages/Home/Index";
-import ProductDetail from "./Pages/ProductDetail/Index";
-import NotFound from "./Pages/NotFound/Index";
-import Auth from "./Pages/Auth/Index";
-import ProductCards from "./Pages/ProductCards/Index";
-import { useSelector } from "react-redux";
-import { Toaster } from "react-hot-toast";
-import { CssBaseline } from "@mui/material";
-export default function App() {
-  const {token , user}=useSelector(state=>state.authSlice)
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+
+function App() {
+  const [count, setCount] = useState(0)
+
   return (
     <>
-    <CssBaseline/>
-      <Navbar />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/productDetail" element={<ProductDetail />} />
-        <Route
-          path="/auth"
-          element={token ? <Navigate to={"/"} /> : <Auth />}
-        />
-        <Route
-          path="/productCards"
-          element={!token ? <Navigate to={"/auth"} /> : <ProductCards />}
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-      <Toaster/>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
     </>
-  );
+  )
 }
+
+export default App
